@@ -28,9 +28,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLICWITHGET = { "/cities/**", "/events/**" };
 	
-	private static final String[] CLIENTWITHPOST = { "/events/**" };
+	private static final String[] CLIENTORADMINWITHPOST = { "/events/**" };
 	
-	private static final String[] ADMIN = { "/**" };
+	private static final String[] ADMIN = { "/cities/**" };
 		
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -48,8 +48,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET, PUBLICWITHGET).permitAll()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.POST, CLIENTWITHPOST).hasAnyRole(RoleKeys.CLIENT)
-		.antMatchers(ADMIN).hasAnyRole(RoleKeys.ADMIN)
+		.antMatchers(HttpMethod.POST, CLIENTORADMINWITHPOST).hasAnyRole(RoleKeys.CLIENT, RoleKeys.ADMIN)
+		.antMatchers(ADMIN).hasRole(RoleKeys.ADMIN)
 		.anyRequest().authenticated();
 	}	
 }
