@@ -1,4 +1,4 @@
-package com.devsuperior.bds04.service;
+package com.devsuperior.bds04.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
